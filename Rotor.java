@@ -1,42 +1,25 @@
 public class Rotor {
 
-    
     private String rotorValues;
     private char startChar;
-    //converting the rotorValues to an array of chars
-    char arr []= rotorValues.toCharArray();
-        
+    private char[] arr;
+
     public Rotor(String v, char c){
         this.rotorValues = new String(v);
         this.startChar = c;
-        
-        while(!this.rotate());
-            
-    }
-    
-    public boolean rotate(){
-        //TODO
-        for(int i = 0;i<27;i++){
-            //iterating through the chars in the rotor
-            if(i == 26){
-            //edge case for last char
-                arr[26] = arr[0];
-            }
-            //rotating "clockwise"
-            arr[i] = arr[i+1];
-            //checking if the starting char is reached so the rotation stops
-            if(arr[i] == startChar){
-                return true;
-            }
+        //turning the rotorValue into a char array
+        arr = rotorValues.toCharArray();
+        //while the desired start char isn't at the front, keep rotating
+        while(!this.rotate()){
+            rotate();
         }
-        //returning false otherwise
+    }
+    public boolean rotate(){
         return false;
     }
     
-
-    public int indexOf(char c){
-        //TODO
-        for(int i = 0; i<rotorValues.length();i++){
+    public int indexOf(char c){//Good
+        for(int i = 0; i<arr.length;i++){
             //checks equality of chars
             if(c == arr[i]){
                 //returns proper index
@@ -47,8 +30,7 @@ public class Rotor {
         return -1;
     }
 
-    public char charAt(int idx){
-        //TODO
+    public char charAt(int idx){//Good
         for(int i = 0; i<rotorValues.length();i++){
             //checks equality of index
             if(idx == i){
