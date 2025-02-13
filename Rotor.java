@@ -15,7 +15,21 @@ public class Rotor {
         }
     }
     public boolean rotate(){
-        return false;
+         //save the last char
+        char last  = arr[arr.length-1];
+        //iterate through chars and shift right; lowest to highest index
+        for(int i = arr.length-1; i>0;i--){
+            arr[i] = arr[i-1];
+        }
+        //make the first index the original last char that was saved
+        arr[0] = last;
+        //checking the the starting char is in the 0th index
+        if(arr[0] == startChar){
+        return true;
+        }
+        else{
+            return false;
+        }
     }
     
     public int indexOf(char c){//Good
