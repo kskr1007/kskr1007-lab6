@@ -19,18 +19,59 @@ public class Enigma{
     }
 
 
-    public String decrypt(String message){        
-        //TODO
+    public String decrypt(String message){ //Bad
+        //edge case for null message
+        if(message == null){
+            return null;
+        }
+        //making char array
+        char arr[] = message.toCharArray();
+        //iterate through chars
+        for(int i = 0; i<arr.length;i++){
+            //mark start
+            int startIndex = rotors[2].indexOf(arr[i]);
+            //mark middle
+            char middleTempChar = rotors[1].charAt(startIndex);
+            //mark outer
+            int outer = rotors[2].indexOf(middleTempChar);
+            //decrypt
+            arr[i] = rotors[0].charAt(outer);
+        }
+        //create string
+        String result = new String(arr);
+        //return decrypted message
+        return result;
     }
 
 
     
-    public String encrypt(String message){
-        //TODO
+    public String encrypt(String message){ //Good
+        //edge case for null message
+        if(message == null){
+            return null;
+        }
+        //make char array
+        char arr[] = message.toCharArray();
+        //iterate through chars
+        for(int i = 0; i<arr.length;i++){
+            //mark start
+            int startIndex = rotors[0].indexOf(arr[i]);
+            //mark outer
+            char outerTempChar = rotors[2].charAt(startIndex);
+            //mark middle
+            int middle = rotors[1].indexOf(outerTempChar);
+            //encrypt
+            arr[i] = rotors[2].charAt(middle);
+            rotate();
+        }
+        //create string
+        String result = new String(arr);
+        //return encrypted message
+        return result;
     }
 
     
-    private void rotate(){
+    private void rotate(){ //Good
         if(rotors[0].rotate()){
             if(rotors[1].rotate()){
                 rotors[2].rotate();
