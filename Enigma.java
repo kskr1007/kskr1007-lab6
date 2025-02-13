@@ -19,7 +19,7 @@ public class Enigma{
     }
 
 
-    public String decrypt(String message){ //Bad
+    public String decrypt(String message){
         //edge case for null message
         if(message == null){
             return null;
@@ -36,6 +36,8 @@ public class Enigma{
             int outer = rotors[2].indexOf(middleTempChar);
             //decrypt
             arr[i] = rotors[0].charAt(outer);
+            //rotate after every decryption
+            rotate();
         }
         //create string
         String result = new String(arr);
@@ -45,7 +47,7 @@ public class Enigma{
 
 
     
-    public String encrypt(String message){ //Good
+    public String encrypt(String message){
         //edge case for null message
         if(message == null){
             return null;
@@ -62,6 +64,7 @@ public class Enigma{
             int middle = rotors[1].indexOf(outerTempChar);
             //encrypt
             arr[i] = rotors[2].charAt(middle);
+            //rotate after every encryption
             rotate();
         }
         //create string
@@ -71,7 +74,7 @@ public class Enigma{
     }
 
     
-    private void rotate(){ //Good
+    private void rotate(){
         if(rotors[0].rotate()){
             if(rotors[1].rotate()){
                 rotors[2].rotate();
